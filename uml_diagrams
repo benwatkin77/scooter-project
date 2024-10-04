@@ -1,0 +1,36 @@
+classDiagram
+    class User {
+        -String username
+        -String password
+        -int age
+        -boolean loggedIn
+        +login(password: String): void
+        +logout(): void
+    }
+
+classDiagram
+    class Scooter {
+        -String station
+        -User user
+        -int serial
+        -static int nextSerial
+        -int charge
+        -boolean isBroken
+        +rent(user: User): void
+        +dock(station: String): void
+        +recharge(): Promise<void>
+        +requestRepair(): Promise<void>
+    }
+
+    classDiagram
+    class ScooterApp {
+        -Map~String, List~Scooter~~ stations
+        -Map~String, User~ registeredUsers
+        +registerUser(username: String, password: String, age: int): User
+        +loginUser(username: String, password: String): void
+        +logoutUser(username: String): void
+        +createScooter(station: String): Scooter
+        +dockScooter(scooter: Scooter, station: String): void
+        +rentScooter(scooter: Scooter, user: User): void
+        +print(): void
+    }
